@@ -1,11 +1,4 @@
-# from django.shortcuts import render
-
-# import requests
 from django.http import HttpResponse, HttpResponseServerError
-
-# def IndexView(request):
-# 	return HttpResponse("iosdjafiosajfio")
-
 from rest_framework import views
 from rest_framework.response import Response
 from .serializers import ParseSerializer
@@ -14,6 +7,8 @@ import requests
 import re
 import glob
 import logging
+import phonenumbers
+from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
 
@@ -31,20 +26,10 @@ class IndexView(views.APIView):
 		body = json.loads(body_unicode)
 		url = body['url']
 		html_data = body['html']
-		print(f'url: {url}')
-		print(f'html data: {html_data}')
-
-		#https://lpnu.ua/
 		req = requests.get(url)
 
 		src = req.text
-		phone = getPhone(src)
-		print(f'phone: {phone}')
+		soup = BeautifulSoup(src)
+		x = phonenumbers.parse(soup.find("div", class_="col-sm-4").text, None)
+		print(x)
 		return Response(request.path)
-
-def getPhone(string):
-	phone = ''
-	phoneRegEx = re.compile('\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4}|\d{2})(?: *x(\d+))?\s*')
-	m = phoneRegEx.search(string)
-	
-	return m
