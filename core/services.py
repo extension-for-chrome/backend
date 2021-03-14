@@ -2,15 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from Parser.LandingParser import LandingParser
-
-
-def parse_html(html):
-
-    parser = LandingParser(html)
-    return {
-        'list_emails': parser.get_list_of_emails(),
-        'phones_numbers': parser.get_list_of_phone_numbers(region='GB')
-    }
+from Parser.PDFParser import PDFParser
 
 
 class ParserMixin(APIView):
@@ -21,7 +13,18 @@ class ParserMixin(APIView):
 
     @staticmethod
     def post(request):
-        if request.POST.get('html'):
-            data = parse_html(request.POST.get('html'))
-            return Response(data)
-        return Response('You should add html text')
+        data = request.data
+
+        if data.get('html', False):
+            contact_data = LandingParser(data['html']).get_contact_data()
+
+        elif data.get('url', False) and isinstance(data['url'], str) and data['url'].find('.pdf') != -1:
+            contact_data = PDFParser.from_url(data['url']).get_contact_data()
+
+        elif data.get('url', False) and isinstance(data['url'], str):
+            contact_data = LandingParser.from_url(data['url']).get_contact_data()
+
+        else:
+            return Response("input correct data")
+
+        return Response(contact_data)

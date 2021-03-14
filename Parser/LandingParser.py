@@ -8,7 +8,7 @@ class LandingParser(BaseParser):
     def __init__(self, html_code):
         self._html = html_code
 
-    def get_list_of_groupd_first_last_names(self):
+    def get_list_of_group_first_last_names(self):
         pass
 
     def get_list_of_links_to_images(self):
@@ -21,7 +21,7 @@ class LandingParser(BaseParser):
         ]
 
     def get_list_of_emails(self):
-        return re.findall(r'[\w\.]+@[\w-]+\.[\w-]{2,4}', self._html)
+        return re.findall(r'[\w\.]+@[\w-]+\.*[\w-]*\.[\w-]{2,4}', self._html)
 
     @staticmethod
     def from_url(url):

@@ -18,6 +18,12 @@ class BaseParser(ABC):
     def get_list_of_emails(self):
         pass
 
+    def get_contact_data(self):
+        return {
+            "phone number": self.get_list_of_phone_numbers(),
+            "email": self.get_list_of_emails()
+        }
+
     @staticmethod
     @abstractmethod
     def from_url(url):
