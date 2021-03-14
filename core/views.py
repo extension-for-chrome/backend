@@ -11,12 +11,12 @@ logger = logging.getLogger(__name__)
 
 
 @api_view(['GET'])
-def api_root(request):
+def api_roots(request):
 	app_name = urls.app_name
 
 	return Response({
 		url.name: reverse(f'{app_name}:{url.name}', request=request)
-		for url_num, url in enumerate(urls.urlpatterns) if url_num > 0
+		for url in urls.urlpatterns if url.name != 'api_roots'
 	})
 
 
