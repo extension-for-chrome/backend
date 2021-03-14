@@ -11,7 +11,7 @@ class BaseParser(ABC):
         pass
 
     @abstractmethod
-    def get_list_of_phone_numbers(self, region=None):
+    def get_list_of_phone_numbers(self):
         pass
 
     @abstractmethod
