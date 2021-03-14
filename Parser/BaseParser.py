@@ -10,7 +10,7 @@ class BaseParser(ABC):
         self._html = html
 
     @abstractmethod
-    def get_list_of_groupd_first_last_names(self):
+    def get_list_of_group_first_last_names(self):
         pass
 
     @abstractmethod
