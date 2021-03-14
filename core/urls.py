@@ -5,5 +5,5 @@ app_name = 'core'
 
 urlpatterns = [
 	path('', views.api_root),
-	path('base-parse/', views.Parse.as_view(), name='parse'),
+	path('parse/', views.Parse.as_view(), name='parse'),
 ]
