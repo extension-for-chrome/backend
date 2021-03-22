@@ -11,16 +11,16 @@ class BaseParser(ABC):
         pass
 
     @abstractmethod
-    def get_list_of_phone_numbers(self):
+    def get_list_of_phone_numbers(self, region='ua'):
         pass
 
     @abstractmethod
     def get_list_of_emails(self):
         pass
 
-    def get_contact_data(self):
+    def get_contact_data(self, region='UA'):
         return {
-            "phone number": self.get_list_of_phone_numbers(),
+            "phone number": self.get_list_of_phone_numbers(region),
             "email": self.get_list_of_emails()
         }
 

@@ -14,7 +14,7 @@ class LandingParser(BaseParser):
     def get_list_of_links_to_images(self):
         pass
 
-    def get_list_of_phone_numbers(self, region='GB'):
+    def get_list_of_phone_numbers(self, region='UA'):
         return [
             phonenumbers.format_number(match.number, phonenumbers.PhoneNumberFormat.E164)
             for match in phonenumbers.PhoneNumberMatcher(self._html, region)
