@@ -4,7 +4,7 @@ import phonenumbers
 import re
 from io import BytesIO
 
-from Parser.BaseParser import BaseParser
+from parser.BaseParser import BaseParser
 
 
 class PDFParser(BaseParser):

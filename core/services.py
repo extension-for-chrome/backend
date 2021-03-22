@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from Parser.LandingParser import LandingParser
-from Parser.PDFParser import PDFParser
+from parser.LandingParser import LandingParser
+from parser.PDFParser import PDFParser
 
 ALLOWED_REGIONS = ('UA', 'RU', 'EN', 'US')
 DEFAULT_REGION = 'UA'
